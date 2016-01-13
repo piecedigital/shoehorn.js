@@ -1,0 +1,30 @@
+{
+  "name": "shoehornjs",
+  "version": "1.0.0",
+  "description": "A JavaScript tool for creating type safety, without the need of a compiler.",
+  "main": "shoehorn.js",
+  "keywords": [
+    "js",
+    "javascript",
+    "jquery",
+    "library",
+    "front-end",
+    "type safety",
+    "typing",
+    "static typing"
+  ],
+  "author": {
+    "name": "Darryl Dixon",
+    "email": "piecedigitalstudios@gmail.com",
+    "url": "http://piecedigital.github.io"
+  },
+  "homepage": "http://piecedigital.github.io/shoehorn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/piecedigital/shoehorn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/piecedigital/shoehorn/issues"
+  },
+  "license": "MIT"
+}
