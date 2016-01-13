@@ -1,6 +1,6 @@
 {
   "name": "shoehornjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A JavaScript tool for creating type safety.",
   "main": "index.js",
   "keywords": [
