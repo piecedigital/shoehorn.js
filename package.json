@@ -18,10 +18,10 @@
     "email": "piecedigitalstudios@gmail.com",
     "url": "http://piecedigital.github.io"
   },
-  "homepage": "http://piecedigital.github.io/shoehorn",
+  "homepage": "http://piecedigital.github.io/shoehornjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/piecedigital/shoehorn.git"
+    "url": "https://github.com/piecedigital/shoehorn.js.git"
   },
   "bugs": {
     "url": "https://github.com/piecedigital/shoehorn/issues"
