@@ -1,26 +1,26 @@
-var shType = function(variableName, lineNumber) {
-  if(typeof variableName === "number") {
-    lineNumber = variableName;
-    variableName = undefined;
-  } else
-  if(typeof variableName !== "string") {
-    variableName = undefined;
-  };
-  if(typeof lineNumber === "number") {
-    lineNumber = parseInt(lineNumber);
-  } else {
-    lineNumber = undefined;
-  };
-
+var shType = function(optionsObject) {
   Array.isArray = Array.isArray || function(value) {
     if(typeof value === "object") {
       return (value.toString() === "[object Object]") ? false : true;
     }
   }
 
+  // makes sure optionsObject is an object
+  optionsObject = (typeof optionsObject === "object" && !Array.isArray(optionsObject)) ? optionsObject : {};
+
+  // makes sure all of the variables in optionsObject are their correct datatypes
+  optionsObject.variableName = optionsObject.variableName || undefined;
+  if(typeof optionsObject.variableName !== "string") optionsObject.variableName = undefined;
+
+  optionsObject.lineNumber = parseInt(optionsObject.lineNumber || undefined);
+  if(typeof optionsObject.lineNumber !== "number" || isNaN(optionsObject.lineNumber)) optionsObject.lineNumber = undefined;
+
+  optionsObject.fileName = optionsObject.fileName || undefined;
+  if(typeof optionsObject.fileName !== "string") optionsObject.fileName = undefined;
+
   return {
     help: function() {
-      console.log("Thanks for using Shoehorn! For more information please visit the documentation at http://github.com/piecedigital/shoehorn.js. \r\n\r\nGetting started TL;DR:\r\n\r\n shType([variableName, lineNumber])[Object|Array|String|Bool|Func|Int|Float](value[, fixedValue])\r\n'fixedValye' in only applicable to datatype Float.\r\n\r\nHave fun! :)")
+      console.log("Thanks for using Shoehorn! For more information please visit the documentation at http://github.com/piecedigital/shoehorn.js. \r\n\r\nGetting started TL;DR:\r\n\r\n shType({variableName: String, lineNumber: Int, fileName: String})[Object|Array|String|Bool|Func|Int|Float](value[, fixedValue])\r\n'fixedValye' in only applicable to datatype Float.\r\n\r\nHave fun! :)")
     },
     trueType: function(value) {
       // this function will return the true type of values and return a string with the first letter uppercased
@@ -56,21 +56,26 @@ var shType = function(variableName, lineNumber) {
     },
     typeError: function(wantedType, value) {
       value = this.trueType(value);
-      lineNumber = (lineNumber || typeof lineNumber === "number") ? lineNumber : (new Error("um")).stack.split("\n")[3].match(/\d*[:]\d*$/).shift();
 
       // create message variable. This will be the error message
       var message = "";
-      // append starting message if variableName and lineNumber exist
-      message += (variableName || lineNumber || typeof lineNumber === "number") ? "Check assignment" : "Unknown variable or line";
-      // appends message for variableName
-      message += (variableName) ? " for '" + variableName + "'" : "";
-      // appends message for lineNumber
-      message += (lineNumber || typeof lineNumber === "number") ? " at line " + lineNumber : "";
+      // append starting message if optionsObject.variableName and optionsObject.lineNumber exist
+      message += (optionsObject.variableName || optionsObject.lineNumber || typeof optionsObject.lineNumber === "number") ? "Check assignment" : "Unknown variable";
+      // appends message for optionsObject.variableName
+      message += (optionsObject.variableName) ? " for '" + optionsObject.variableName + "'" : "";
+      // appends message for optionsObject.lineNumber
+      message += (optionsObject.lineNumber || typeof optionsObject.lineNumber === "number") ? " at line " + optionsObject.lineNumber : "";
+      // appends message for optionsObject.fileName
+      message += (optionsObject.fileName || typeof optionsObject.fileName === "number") ? " in file " + optionsObject.fileName : "";
 
       // this message is for if value is "Undefined"
       var undefinedMsg = (value === "Undefined") ? "Please check that you are actually assigning a value or the expected value exists" : "";
 
-      console.error("Invalid datatype. Expected type '" + wantedType + "'; instead got '" + value + "'." + ((message) ? " " + message + "." : "" ) + ((undefinedMsg) ? " " + undefinedMsg + "." : "" ));
+      var finalMsg = "Expected type '" + wantedType + "'; instead got '" + value + "'." + ((message) ? " " + message + "." : "" ) + ((undefinedMsg) ? " " + undefinedMsg + "." : "" );
+
+      var error = (new TypeError(finalMsg)).stack;
+
+      console.error(error);
     },
     Object: function(value) {
       if(typeof value === "object" && !Array.isArray(value)) {
@@ -131,10 +136,10 @@ var shType = function(variableName, lineNumber) {
   }
 };
 
-if(typeof module === "object" && module.exports) {
+if(typeof module !== "undefined" && typeof module === "object") {
  module.exports = shType;
 };
-if(typeof window !== "undefined") {
+if(typeof window !== "undefined" && typeof window === "object") {
  window.shoehorn = shType;
  window.shType = shType;
 };

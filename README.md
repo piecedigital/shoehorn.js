@@ -10,23 +10,27 @@ ShoehornJS can be required for use with [NodeJS](https://nodejs.org/).
 
 ### The Initial Call
 
-In the browser Shoehorn is available globally as either `shoehorn` or `shType` (in NodeJS it's available as whatever you require it as). `shoehorn` is a function that accepts 2 arguments
+In the browser Shoehorn is available globally as either `shoehorn` or `shType` (in NodeJS it's available as whatever you require it as). `shoehorn` is a function that accepts an object as its only argument.
 
 ``` js
-shoehorn([variableName, lineNumber])
+var myObject = {
+  variableName: String,
+  lineNumber: Int,
+  fileName: String
+};
+
+shoehorn(myObject);
 ```
 ##### variableName: String
-This argument should be a string and will be used as the name of the variable that you are assigning a value to.
+This argument should be a string and will be used in the error message as the name of the variable that you are assigning a value to.
 
 ##### lineNumber: Int
-This argument should be a number and will be used at the line number that you are assigning a variable.
+This argument should be a number and will be included in the error message as the line where the error occurs.
 
-If this value is not provided then the error stack will be used to find the line where the error occurred.
+##### fileName: String
+This argument should be a String and will be included in the error message as the file where the error occurs.
 
-**Note: The error stack alternative is experimental and not guaranteed to work in all environments, especially IE and legacy browsers.**
-
-You don't have to use both just to use one; they just have to be the correct datatypes to be properly sorted. You also don't have to use either to make this function work; these are purely for error handling purposes.
-
+**Note: A normal error stack will still be logged. These options give you the opportunity to make the error log a bit more robust and understandable.**
 
 ### Assigning a Value
 `shoehorn()` returns an object with other functions to be called.
@@ -47,7 +51,7 @@ You don't have to use both just to use one; they just have to be the correct dat
 }
 ```
 ##### help: function
-This will return a short thank you message and a "TL;DR" of how to use ShoehornJS
+This will log to the console a short thank you message and a "TL;DR" of how to use ShoehornJS
 
 ##### trueType: function(value)
 This will return a string of the true datatype of a given `value`, with the first letter of that datatype being capitalized. Normally in JS datatypes returned from `typeof` would be all lowercased, but... I just liked it this way so that's why I made the first letter uppercase.
