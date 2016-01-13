@@ -1,7 +1,7 @@
 {
   "name": "shoehornjs",
   "version": "1.0.0",
-  "description": "A JavaScript tool for creating type safety, without the need of a compiler.",
+  "description": "A JavaScript tool for creating type safety.",
   "main": "shoehorn.js",
   "keywords": [
     "js",
