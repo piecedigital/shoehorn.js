@@ -33,18 +33,17 @@ You don't have to use both just to use one; they just have to be the correct dat
 
 ``` js
 {
-  {
-    help: function()
-    trueType: function(value)
-    compareType: function(type1, type2)
-    typeError: function(wantedType, value)
-    Object: function(value)
-    Array: function(value)
-    String: function(value)
-    Bool: function(value)
-    Func: function(value)
-    Int: function (value)
-    Float: function (value, fixedValue)
+  help: function()
+  trueType: function(value)
+  compareType: function(type1, type2)
+  typeError: function(wantedType, value)
+  Object: function(value)
+  Array: function(value)
+  String: function(value)
+  Bool: function(value)
+  Func: function(value)
+  Int: function (value)
+  Float: function (value, fixedValue)
 }
 ```
 ##### help: function
