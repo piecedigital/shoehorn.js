@@ -26,15 +26,15 @@ var shType = function(optionsObject) {
       // this function will return the true type of values and return a string with the first letter uppercased
       // e.g., an object will return "Object", and an array will return "Array"
       if(typeof value === "object") {
-        return (Array.isArray(value)) ? "Array" : "Object"
+        return (Array.isArray(value)) ? "Array" : (value === null ? "Null" : "Object")
       } else
       if(typeof value === "number") {
         if(value.toString().match(/^\d{1,}\.\d{1,}$/)) {
-        return "Float";
-      }
-      return "Int";
+          return "Float";
+        }
+        return "Int";
       } else {
-      return (typeof value).replace(/^./, (typeof value)[0].toUpperCase());
+        return (typeof value).replace(/^./, (typeof value)[0].toUpperCase());
       }
     },
     compareType: function(type1, type2) {
@@ -78,7 +78,7 @@ var shType = function(optionsObject) {
       console.error(error);
     },
     Object: function(value) {
-      if(typeof value === "object" && !Array.isArray(value)) {
+      if(typeof value === "object" && !Array.isArray(value) && value !== null) {
         return value;
       } else {
         this.typeError("Object", value);
