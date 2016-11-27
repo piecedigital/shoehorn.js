@@ -97,8 +97,7 @@ Returns `value` if it is a number. Although, due to the values you may provide, 
 Example usage:
 
 ``` js
-var foo
-= shType({
+var foo = shType({
   variableName: "foo"
 }).String("bar")
 console.log(foo); // bar
@@ -107,8 +106,7 @@ shType({
 }).trueType(foo); // "String";
 ```
 ``` js
-var foo
-= shType({
+var foo = shType({
   variableName: "foo"
 }, 0).String(false);// Error!
 console.log(foo); // (empty string)
