@@ -98,7 +98,8 @@ Example usage:
 
 ``` js
 var foo
-= shType({ variableName: "foo"
+= shType({
+  variableName: "foo"
 }).String("bar")
 console.log(foo); // bar
 shType({
@@ -107,7 +108,8 @@ shType({
 ```
 ``` js
 var foo
-= shType({ variableName: "foo"
+= shType({
+  variableName: "foo"
 }, 0).String(false);// Error!
 console.log(foo); // (empty string)
 shType({
